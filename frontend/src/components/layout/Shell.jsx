@@ -15,7 +15,7 @@ import {
   ChevronRight
 } from 'lucide-react';
 
-const Shell = ({ children, title = "Consola Operativa", subtitle = "L'Atelier Culinaire Noir" }) => {
+const Shell = ({ children, title = "Consola Operativa", subtitle = "Gestor de Cocinas Ocultas & Despacho" }) => {
   const { usuario, logout } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
@@ -27,7 +27,7 @@ const Shell = ({ children, title = "Consola Operativa", subtitle = "L'Atelier Cu
   }, []);
 
   const navItems = [
-    { to: '/', label: 'Atelier Noir', icon: Sparkles, badge: 'Front' },
+    { to: '/', label: 'DarkKitchen Hub', icon: Sparkles, badge: 'Portal' },
     { to: '/pedidos', label: 'Consola de Despacho', icon: ClipboardList, badge: 'Live' },
     { to: '/kds', label: 'Monitor KDS Cocina', icon: MonitorPlay, badge: 'KDS' },
     { to: '/marcas', label: 'Marcas Satélite', icon: Store },
@@ -46,8 +46,8 @@ const Shell = ({ children, title = "Consola Operativa", subtitle = "L'Atelier Cu
                 <Flame className="w-5 h-5" />
               </div>
               <div>
-                <h1 className="font-serif text-lg font-bold tracking-wide text-brand-primary">L'Atelier Noir</h1>
-                <p className="text-[10px] tracking-widest uppercase font-mono text-gold-400">DarkKitchen Hub</p>
+                <h1 className="font-serif text-lg font-bold tracking-wide text-brand-primary">DarkKitchen Hub</h1>
+                <p className="text-[10px] tracking-widest uppercase font-mono text-gold-400">Cocinas Ocultas & Despacho</p>
               </div>
             </div>
           </div>
@@ -102,7 +102,7 @@ const Shell = ({ children, title = "Consola Operativa", subtitle = "L'Atelier Cu
               </div>
               <div className="truncate">
                 <p className="text-xs font-medium text-brand-primary truncate">{usuario?.nombre || 'Chef Ejecutivo'}</p>
-                <p className="text-[10px] font-mono text-brand-muted truncate">{usuario?.correo || 'operador@noir.hub'}</p>
+                <p className="text-[10px] font-mono text-brand-muted truncate">{usuario?.correo || 'operador@darkkitchen.com'}</p>
               </div>
             </div>
           </div>

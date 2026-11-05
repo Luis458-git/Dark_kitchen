@@ -47,7 +47,6 @@ const LoginPage = () => {
           return;
         }
         await register(nombre, correo, password);
-        // Auto-login posterior
         await login(correo, password);
         navigate('/pedidos');
       }
@@ -71,7 +70,7 @@ const LoginPage = () => {
           <Flame className="w-6 h-6" />
         </div>
         <div>
-          <h1 className="font-serif text-2xl font-bold tracking-wide text-brand-primary">L'Atelier Noir</h1>
+          <h1 className="font-serif text-2xl font-bold tracking-wide text-brand-primary">DarkKitchen Hub</h1>
           <p className="text-[10px] font-mono tracking-widest uppercase text-gold-400 font-semibold">Gateway Operativo B2B</p>
         </div>
       </Link>

@@ -288,3 +288,4 @@ const KdsPage = () => {
 };
 
 export default KdsPage;
+

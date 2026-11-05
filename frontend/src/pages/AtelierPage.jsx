@@ -101,8 +101,8 @@ const AtelierPage = () => {
             <Flame className="w-5 h-5" />
           </div>
           <div>
-            <span className="font-serif text-lg tracking-wide font-bold">L'Atelier Culinaire Noir</span>
-            <span className="text-[10px] font-mono text-gold-400 block tracking-widest uppercase">DarkKitchen Hub</span>
+            <span className="font-serif text-lg tracking-wide font-bold">DarkKitchen Hub</span>
+            <span className="text-[10px] font-mono text-gold-400 block tracking-widest uppercase">Gestor de Cocinas Ocultas & Despacho</span>
           </div>
         </div>
 
@@ -133,7 +133,7 @@ const AtelierPage = () => {
       <section className="relative px-8 py-24 max-w-6xl mx-auto border-b border-noir-700/40">
         <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-gold-400/30 bg-gold-400/10 text-gold-400 text-xs font-mono mb-8">
           <Sparkles className="w-3.5 h-3.5" />
-          <span className="tracking-widest uppercase font-semibold">Laboratorio Culinario & Ghost Kitchen B2B</span>
+          <span className="tracking-widest uppercase font-semibold">DarkKitchen Hub — Sistema B2B</span>
         </div>
 
         <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-brand-primary leading-[1.1] mb-8 max-w-4xl">
@@ -258,7 +258,7 @@ const AtelierPage = () => {
         <div>
           <span>DarkKitchen Hub © 2026</span>
           <span className="mx-2">·</span>
-          <span>L'Atelier Culinaire Noir — Sistema B2B</span>
+          <span>Gestor Empresarial de Cocinas Ocultas B2B</span>
         </div>
         <div className="mt-4 md:mt-0 flex items-center space-x-6">
           <Link to="/login" className="hover:text-gold-400 transition-colors">Consola Operativa</Link>
