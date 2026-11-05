@@ -1,7 +1,7 @@
 # Control de Requerimientos y Entregables — Mini Proyecto 1 (Día 1)
 
 **Proyecto:** DarkKitchen Hub (Gestor de Cocinas Ocultas y Despacho Multiplataforma)  
-**Stack Base:** Node.js, Express, Sequelize, MySQL, React  
+**Stack Base:** Node.js, Express, Sequelize ORM, MySQL (mysql2), React  
 **Restricción transversal:** Sin autenticación (cero login, registro, tokens o roles)
 
 ---
@@ -42,5 +42,36 @@
 
 ---
 
-## 3. Estado Final del Día 1
-Todos los criterios exigidos en la rúbrica del Día 1 han sido alcanzados con éxito.
+## 3. Registro Detallado de Trabajos Realizados
+
+A continuación se registra de manera cronológica cada uno de los trabajos ejecutados en el proyecto:
+
+| # | Fecha | Componente / Archivo | Trabajo Realizado | Resultado / Impacto |
+| :-: | :---: | :--- | :--- | :--- |
+| **01** | 04/11 | `requerimientos.md` | Análisis inicial de requerimientos funcionales (RF-01 a RF-09), no funcionales (RNF-01 a RNF-08) y restricciones de acceso. | Alcance acotado: prohibido login/tokens, enfoque 100% CRUD empresarial. |
+| **02** | 04/11 | `.gitignore` | Creación del archivo de exclusiones en la raíz del repositorio. | Protege `node_modules/`, variables privadas `.env`, builds y logs. |
+| **03** | 04/11 | `backend/`, `frontend/` | Creación del árbol completo de carpetas para arquitectura desacoplada según especificación. | Estructura modular base lista para alojar código fuente. |
+| **04** | 04/11 | `backend/package.json` | Instalación de dependencias de producción (`express`, `sequelize`, `mysql2`, `dotenv`, `cors`) y desarrollo (`sequelize-cli`, `nodemon`). | Entorno de ejecución y ORM listos con scripts `npm start` y `npm run dev`. |
+| **05** | 04/11 | `backend/.sequelizerc` | Configuración de rutas para Sequelize CLI apuntando a `src/config`, `src/models`, `src/migrations` y `src/seeders`. | Integración limpia de Sequelize dentro de la convención `src/`. |
+| **06** | 04/11 | `backend/.env` / `.env.example` | Creación de plantilla `.env.example` y archivo local `.env` con variables `PORT`, `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD`, `DB_NAME`. | Configuración desacoplada y segura de credenciales de MySQL. |
+| **07** | 04/11 | `backend/src/config/database.js` | Configuración del dialecto MySQL en Sequelize leyendo variables dinámicamente con `dotenv`. | Permite conexión transparente a la base de datos sin credenciales hardcodeadas. |
+| **08** | 04/11 | `backend/src/models/index.js` | Inicialización automática del cargador de modelos y asociaciones de Sequelize vía CLI. | Instancia central `sequelize` y registro dinámico de entidades. |
+| **09** | 04/11 | `backend/src/models/MarcaVirtual.js` | Definición de la entidad `marcas_virtuales` con validaciones de Sequelize (`notNull`, `notEmpty`, `len`, regex `TIME_REGEX` para horas). | Campos: `id`, `nombre`, `tipo_cocina`, `horario_apertura`, `horario_cierre`, `activo`, `timestamps`. |
+| **10** | 04/11 | `backend/src/controllers/marcasController.js` | Implementación de controladores `listarMarcas` y `crearMarca` con validación previa de obligatoriedad, tipos de datos y formato de horas. | Retorna `200 OK` en listado y `201 Created` en inserción; `400 Bad Request` ante datos erróneos. |
+| **11** | 04/11 | `backend/src/routes/marcasRoutes.js` | Definición de rutas REST: `GET /` y `POST /`. | Mapeo directo a los métodos del controlador. |
+| **12** | 04/11 | `backend/src/middlewares/errorHandler.js` | Middleware central de captura de excepciones: captura JSON roto (400), errores Sequelize (400) y fallos generales (500). | Formato homogéneo de respuesta de error en toda la API. |
+| **13** | 04/11 | `backend/src/utils/apiResponse.js` | Funciones auxiliares `successResponse` y `errorResponse`. | Respuestas JSON estándar con estructura `{ success, message, data/errors }`. |
+| **14** | 04/11 | `backend/src/app.js` | Ensamble de Express, middlewares globales (`cors`, `express.json`), enrutador `/api/marcas` y manejador 404. | Aplicación HTTP modular desacoplada del arranque del servidor. |
+| **15** | 04/11 | `backend/src/server.js` | Conexión con `sequelize.authenticate()`, sincronización con `sequelize.sync({ alter: true })` y escucha del puerto. | La tabla `marcas_virtuales` se crea o actualiza automáticamente al arrancar. |
+| **16** | 04/11 | `backend/.env` / Config | Corrección del nombre de la base de datos de `dark_kitchen_hub` a `dark_kitchen_db`. | Conexión exitosa verificada contra la base de datos real del usuario. |
+| **17** | 04/11 | Repositorio GitHub | Primer commit y subida del proyecto a `https://github.com/Luis458-git/Dark_kitchen.git` en rama `main`. | Control de versiones activo excluyendo credenciales sensibles. |
+| **18** | 05/11 | Pruebas Postman | Verificación en vivo de endpoints HTTP: `POST /api/marcas` (código 201) y `GET /api/marcas` (código 200). | CRUD funcional del Día 1 comprobado y validado en base de datos. |
+| **19** | 05/11 | `README.md` | Normalización de codificación a UTF-8 (resolviendo problema de formato binario en Git). | Texto, acentos y visualización limpia en GitHub y editores de código. |
+| **20** | 05/11 | `README.md` | Modelado de datos formal: identificación de 8 entidades candidatas, selección de 3 principales (`marcas_virtuales`, `platillos`, `pedidos`). | Cumplimiento del 35% de la ponderación evaluativa. |
+| **21** | 05/11 | `README.md` | Elaboración del diccionario de datos (tipos, nulos, llaves PK/FK, valores por defecto) y Diagrama ER visual en Mermaid. | Relaciones 1:N documentadas con reglas de integridad referencial. |
+| **22** | 05/11 | Git Sync | Commit y push de documentación, diccionario de datos y checklist al repositorio remoto. | Repositorio 100% sincronizado y listo para evaluación. |
+
+---
+
+## 4. Estado Final del Día 1
+Todos los criterios exigidos en la rúbrica del Día 1 han sido alcanzados y documentados con éxito. El proyecto cuenta con base de datos sincronizada, endpoints activos probados en Postman y modelado de datos completo.
