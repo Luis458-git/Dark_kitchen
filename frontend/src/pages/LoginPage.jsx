@@ -8,7 +8,6 @@ import {
   UserPlus,
   ShieldAlert,
   ArrowRight,
-  Terminal,
   Lock,
   Mail,
   User,
@@ -26,12 +25,6 @@ const LoginPage = () => {
 
   const { login, register } = useAuth();
   const navigate = useNavigate();
-
-  const handleDemoCredentials = () => {
-    setCorreo('chef@darkkitchen.com');
-    setPassword('Password123');
-    setTab('login');
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -241,20 +234,8 @@ const LoginPage = () => {
             </button>
           </form>
 
-          {/* Botón Demo con 1 Clic */}
-          <div className="mt-6 pt-5 border-t border-noir-700/60">
-            <button
-              type="button"
-              onClick={handleDemoCredentials}
-              className="w-full py-2 px-3 rounded bg-noir-800 hover:bg-noir-700 border border-noir-700 text-xs font-mono text-gold-400/90 hover:text-gold-300 transition-colors flex items-center justify-center space-x-2"
-            >
-              <Terminal className="w-3.5 h-3.5 text-gold-400" />
-              <span>Cargar Credencial Demo (Shift Lead / Admin)</span>
-            </button>
-          </div>
-
           {/* Telemetría del Gateway */}
-          <div className="mt-5 text-center text-[11px] font-mono text-brand-muted">
+          <div className="mt-6 pt-5 border-t border-noir-700/60 text-center text-[11px] font-mono text-brand-muted">
             <span>Protocolo: <strong>REST / Bearer JWT</strong></span>
             <span className="mx-2">·</span>
             <span>Expiración: <strong>8 Horas</strong></span>
