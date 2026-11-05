@@ -2,7 +2,8 @@ export const IMAGES = {
   // Hero editorial oscuro & Login Luxe
   heroAtelierNoir: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1600&q=85',
   heroAtelierDore: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1600&q=85',
-  loginLuxe: 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=1600&q=85',
+  // Ambientación lateral Login Luxe (Fotografía gastronómica editorial Atelier Noir)
+  loginLuxe: '/assets/images/login-atelier.jpg',
 
   // Catálogo de Platillos & Creaciones
   tarteletteNoire: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80',
