@@ -155,7 +155,10 @@ const MarcasPage = () => {
 
       {/* Métricas de Satélites */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
-        <div className="p-5 rounded-xl bg-noir-900 border border-noir-700/80">
+        <div
+          style={{ animationDelay: '0ms' }}
+          className="p-5 rounded-xl bg-noir-900 border border-noir-700/80 animate-card-enter card-hover-elevation"
+        >
           <div className="flex items-center justify-between text-brand-muted text-xs font-mono uppercase">
             <span>Marcas Totales</span>
             <Store className="w-4 h-4 text-gold-400" />
@@ -168,7 +171,10 @@ const MarcasPage = () => {
           </div>
         </div>
 
-        <div className="p-5 rounded-xl bg-noir-900 border border-noir-700/80">
+        <div
+          style={{ animationDelay: '45ms' }}
+          className="p-5 rounded-xl bg-noir-900 border border-noir-700/80 animate-card-enter card-hover-elevation"
+        >
           <div className="flex items-center justify-between text-brand-muted text-xs font-mono uppercase">
             <span>Satélites en Servicio</span>
             <Flame className="w-4 h-4 text-emerald-400" />
@@ -181,7 +187,10 @@ const MarcasPage = () => {
           </div>
         </div>
 
-        <div className="p-5 rounded-xl bg-noir-900 border border-noir-700/80">
+        <div
+          style={{ animationDelay: '90ms' }}
+          className="p-5 rounded-xl bg-noir-900 border border-noir-700/80 animate-card-enter card-hover-elevation"
+        >
           <div className="flex items-center justify-between text-brand-muted text-xs font-mono uppercase">
             <span>Recetas Maestras</span>
             <ChefHat className="w-4 h-4 text-amber-400" />
@@ -204,7 +213,7 @@ const MarcasPage = () => {
 
         <button
           onClick={() => { limpiarForm(); setModalOpen(true); }}
-          className="px-4 py-2 rounded-lg bg-gold-400 hover:bg-gold-300 text-noir-950 text-xs font-mono font-bold tracking-wider uppercase transition-all shadow-gold-glow flex items-center space-x-1.5"
+          className="px-4 py-2 rounded-lg bg-gold-400 hover:bg-gold-300 text-noir-950 text-xs font-mono font-bold tracking-wider uppercase transition-all shadow-gold-glow flex items-center space-x-1.5 active:scale-95 duration-150"
         >
           <Plus className="w-4 h-4" />
           <span>Nueva Marca Satélite</span>
@@ -222,10 +231,11 @@ const MarcasPage = () => {
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {marcas.map((m) => (
+          {marcas.map((m, idx) => (
             <div
               key={m.id}
-              className={`p-6 rounded-xl bg-noir-900 border transition-all duration-300 flex flex-col justify-between ${
+              style={{ animationDelay: `${(idx + 3) * 45}ms` }}
+              className={`p-6 rounded-xl bg-noir-900 border transition-all duration-300 flex flex-col justify-between animate-card-enter card-hover-elevation ${
                 m.activo ? 'border-noir-700 hover:border-gold-400/50' : 'border-rose-500/20 opacity-75'
               }`}
             >
@@ -236,7 +246,7 @@ const MarcasPage = () => {
                   </span>
                   <button
                     onClick={() => handleToggleActivo(m)}
-                    className={`px-2 py-0.5 rounded flex items-center space-x-1 transition-colors ${
+                    className={`px-2 py-0.5 rounded flex items-center space-x-1 transition-all active:scale-95 duration-150 ${
                       m.activo
                         ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/30'
                         : 'bg-rose-500/10 text-rose-400 border border-rose-500/30'
@@ -275,14 +285,14 @@ const MarcasPage = () => {
                 <div className="flex items-center space-x-2">
                   <button
                     onClick={() => abrirEditar(m)}
-                    className="p-1.5 rounded bg-noir-800 hover:bg-noir-700 text-brand-secondary hover:text-gold-400 transition-colors"
+                    className="p-1.5 rounded bg-noir-800 hover:bg-noir-700 text-brand-secondary hover:text-gold-400 transition-all active:scale-95 duration-150"
                     title="Editar marca"
                   >
                     <Edit2 className="w-4 h-4" />
                   </button>
                   <button
                     onClick={() => { setMarcaAEliminar(m); setEliminarModal(true); }}
-                    className="p-1.5 rounded bg-noir-800 hover:bg-rose-500/10 text-brand-secondary hover:text-rose-400 transition-colors"
+                    className="p-1.5 rounded bg-noir-800 hover:bg-rose-500/10 text-brand-secondary hover:text-rose-400 transition-all active:scale-95 duration-150"
                     title="Eliminar marca"
                   >
                     <Trash2 className="w-4 h-4" />
@@ -296,13 +306,16 @@ const MarcasPage = () => {
 
       {/* Modal Crear / Editar */}
       {modalOpen && (
-        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="w-full max-w-lg bg-noir-900 border border-gold-400/40 rounded-xl p-6 shadow-obsidian">
+        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 animate-backdrop-enter">
+          <div className="w-full max-w-lg bg-noir-900 border border-gold-400/40 rounded-xl p-6 shadow-obsidian animate-modal-enter">
             <div className="flex items-center justify-between pb-4 mb-4 border-b border-noir-700">
               <h3 className="font-serif text-lg font-bold text-brand-primary">
                 {editandoId ? `Editar Marca (${nombre})` : 'Registrar Marca Satélite'}
               </h3>
-              <button onClick={() => setModalOpen(false)} className="text-brand-muted hover:text-brand-primary">
+              <button
+                onClick={() => setModalOpen(false)}
+                className="text-brand-muted hover:text-brand-primary active:scale-95 transition-transform duration-150"
+              >
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -372,14 +385,14 @@ const MarcasPage = () => {
                 <button
                   type="button"
                   onClick={() => setModalOpen(false)}
-                  className="px-4 py-2 rounded bg-noir-800 text-brand-secondary hover:text-brand-primary"
+                  className="px-4 py-2 rounded bg-noir-800 text-brand-secondary hover:text-brand-primary active:scale-95 transition-all duration-150"
                 >
                   Cancelar
                 </button>
                 <button
                   type="submit"
                   disabled={guardando}
-                  className="px-5 py-2 rounded bg-gold-400 hover:bg-gold-300 text-noir-950 font-bold uppercase tracking-wider shadow-gold-glow"
+                  className="px-5 py-2 rounded bg-gold-400 hover:bg-gold-300 text-noir-950 font-bold uppercase tracking-wider shadow-gold-glow active:scale-95 transition-all duration-150 disabled:opacity-50"
                 >
                   {guardando ? 'Guardando...' : editandoId ? 'Actualizar Satélite' : 'Registrar Marca'}
                 </button>
@@ -391,8 +404,8 @@ const MarcasPage = () => {
 
       {/* Modal Confirmar Eliminar con Alerta 409 */}
       {eliminarModal && (
-        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="w-full max-w-md bg-noir-900 border border-rose-500/40 rounded-xl p-6 shadow-obsidian text-xs font-mono">
+        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 animate-backdrop-enter">
+          <div className="w-full max-w-md bg-noir-900 border border-rose-500/40 rounded-xl p-6 shadow-obsidian text-xs font-mono animate-modal-enter">
             <div className="flex items-center space-x-2 text-rose-400 mb-2">
               <AlertTriangle className="w-5 h-5 shrink-0" />
               <h3 className="font-serif text-lg font-bold">¿Eliminar {marcaAEliminar?.nombre}?</h3>
@@ -403,13 +416,13 @@ const MarcasPage = () => {
             <div className="flex justify-end space-x-3">
               <button
                 onClick={() => setEliminarModal(false)}
-                className="px-4 py-2 rounded bg-noir-800 text-brand-secondary hover:text-brand-primary"
+                className="px-4 py-2 rounded bg-noir-800 text-brand-secondary hover:text-brand-primary active:scale-95 transition-all duration-150"
               >
                 Cancelar
               </button>
               <button
                 onClick={confirmarEliminar}
-                className="px-4 py-2 rounded bg-rose-500 hover:bg-rose-400 text-white font-bold uppercase tracking-wider"
+                className="px-4 py-2 rounded bg-rose-500 hover:bg-rose-400 text-white font-bold uppercase tracking-wider active:scale-95 transition-all duration-150"
               >
                 Confirmar Eliminación
               </button>

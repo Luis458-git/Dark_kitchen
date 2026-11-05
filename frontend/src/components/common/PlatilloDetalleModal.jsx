@@ -119,11 +119,11 @@ const PlatilloDetalleModal = ({ item, onClose }) => {
 
   return (
     <div
-      className="fixed inset-0 z-[60] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+      className="fixed inset-0 z-[60] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 animate-backdrop-enter"
       onClick={onClose}
     >
       <div
-        className="w-full max-w-4xl max-h-[92vh] overflow-y-auto bg-noir-900 border border-gold-400/40 rounded-2xl shadow-obsidian grid grid-cols-1 md:grid-cols-2"
+        className="w-full max-w-4xl max-h-[92vh] overflow-y-auto bg-noir-900 border border-gold-400/40 rounded-2xl shadow-obsidian grid grid-cols-1 md:grid-cols-2 animate-modal-enter"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Columna Imagen */}

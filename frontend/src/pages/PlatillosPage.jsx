@@ -189,7 +189,7 @@ const PlatillosPage = () => {
 
         <button
           onClick={() => { limpiarForm(); setModalOpen(true); }}
-          className="px-4 py-2 rounded-lg bg-gold-400 hover:bg-gold-300 text-noir-950 text-xs font-mono font-bold tracking-wider uppercase transition-all shadow-gold-glow flex items-center space-x-1.5 shrink-0"
+          className="px-4 py-2 rounded-lg bg-gold-400 hover:bg-gold-300 text-noir-950 text-xs font-mono font-bold tracking-wider uppercase transition-all shadow-gold-glow flex items-center space-x-1.5 shrink-0 active:scale-95 duration-150"
         >
           <Plus className="w-4 h-4" />
           <span>Nueva Ficha de Receta</span>
@@ -296,13 +296,16 @@ const PlatillosPage = () => {
 
       {/* Modal Crear / Editar Receta */}
       {modalOpen && (
-        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="w-full max-w-lg bg-noir-900 border border-gold-400/40 rounded-xl p-6 shadow-obsidian">
+        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 animate-backdrop-enter">
+          <div className="w-full max-w-lg bg-noir-900 border border-gold-400/40 rounded-xl p-6 shadow-obsidian animate-modal-enter">
             <div className="flex items-center justify-between pb-4 mb-4 border-b border-noir-700">
               <h3 className="font-serif text-lg font-bold text-brand-primary">
                 {editandoId ? `Editar Receta (${nombre})` : 'Estandarizar Nueva Receta'}
               </h3>
-              <button onClick={() => setModalOpen(false)} className="text-brand-muted hover:text-brand-primary">
+              <button
+                onClick={() => setModalOpen(false)}
+                className="text-brand-muted hover:text-brand-primary active:scale-95 transition-transform duration-150"
+              >
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -422,8 +425,8 @@ const PlatillosPage = () => {
 
       {/* Modal Confirmar Eliminar */}
       {eliminarModal && (
-        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="w-full max-w-md bg-noir-900 border border-rose-500/40 rounded-xl p-6 shadow-obsidian text-xs font-mono">
+        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 animate-backdrop-enter">
+          <div className="w-full max-w-md bg-noir-900 border border-rose-500/40 rounded-xl p-6 shadow-obsidian text-xs font-mono animate-modal-enter">
             <h3 className="font-serif text-lg font-bold text-rose-400 mb-2">
               ¿Eliminar {platilloAEliminar?.nombre}?
             </h3>
@@ -433,13 +436,13 @@ const PlatillosPage = () => {
             <div className="flex justify-end space-x-3">
               <button
                 onClick={() => setEliminarModal(false)}
-                className="px-4 py-2 rounded bg-noir-800 text-brand-secondary hover:text-brand-primary"
+                className="px-4 py-2 rounded bg-noir-800 text-brand-secondary hover:text-brand-primary active:scale-95 transition-all duration-150"
               >
                 Cancelar
               </button>
               <button
                 onClick={confirmarEliminar}
-                className="px-4 py-2 rounded bg-rose-500 hover:bg-rose-400 text-white font-bold uppercase tracking-wider"
+                className="px-4 py-2 rounded bg-rose-500 hover:bg-rose-400 text-white font-bold uppercase tracking-wider active:scale-95 transition-all duration-150"
               >
                 Confirmar Eliminación
               </button>
