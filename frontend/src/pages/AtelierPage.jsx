@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { IMAGES } from '../constants/images';
+import PlatilloDetalleModal from '../components/common/PlatilloDetalleModal';
 import {
   Flame,
   Sparkles,
@@ -18,6 +19,7 @@ import {
 
 const AtelierPage = () => {
   const [coleccionActiva, setColeccionActiva] = useState('nocturne');
+  const [platilloSeleccionado, setPlatilloSeleccionado] = useState(null);
 
   const colecciones = [
     { id: 'nocturne', label: 'Creaciones de la Noche', count: '04 Obras' },
@@ -262,7 +264,11 @@ const AtelierPage = () => {
           {listaProductos.map((item, idx) => (
             <div
               key={idx}
-              className="group p-4 rounded-xl bg-noir-900 border border-noir-700/80 hover:border-gold-400/50 transition-all duration-300 flex flex-col justify-between hover:shadow-gold-glow/20"
+              role="button"
+              tabIndex={0}
+              onClick={() => setPlatilloSeleccionado(item)}
+              onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && setPlatilloSeleccionado(item)}
+              className="group cursor-pointer p-4 rounded-xl bg-noir-900 border border-noir-700/80 hover:border-gold-400/50 transition-all duration-300 flex flex-col justify-between hover:shadow-gold-glow/20 focus:outline-none focus:border-gold-400"
             >
               <div>
                 {/* Contenedor de Imagen con Zoom Hover */}
@@ -380,6 +386,14 @@ const AtelierPage = () => {
           <Link to="/marcas" className="hover:text-gold-400 transition-colors">Marcas Satélite</Link>
         </div>
       </footer>
+
+      {/* Modal de Detalle y Compra de Platillo */}
+      {platilloSeleccionado && (
+        <PlatilloDetalleModal
+          item={platilloSeleccionado}
+          onClose={() => setPlatilloSeleccionado(null)}
+        />
+      )}
     </div>
   );
 };
