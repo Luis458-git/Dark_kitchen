@@ -13,3 +13,4 @@ router.post('/multi-agent', aiController.ejecutarMultiAgente);
 router.get('/clientes', aiController.obtenerClientes);
 
 module.exports = router;
+

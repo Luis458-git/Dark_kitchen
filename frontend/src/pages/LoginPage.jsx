@@ -62,12 +62,12 @@ const LoginPage = () => {
 
   return (
     <div className="min-h-screen bg-noir-950 flex flex-col lg:flex-row relative overflow-hidden">
-      {/* Ambientación Lateral Izquierda (Luxe Edition con heroAtelierNoir y viñeta hacia #0D0E12) */}
+      {/* Ambientación Lateral Izquierda (Luxe Edition con imagen solicitada y viñeta hacia #0D0E12) */}
       <div className="hidden lg:flex lg:w-1/2 xl:w-5/12 relative flex-col justify-between p-12 overflow-hidden border-r border-noir-800/80">
         {/* Imagen de fondo con viñeta difusa orgánica */}
         <div className="absolute inset-0 z-0">
           <img
-            src={IMAGES.heroAtelierNoir}
+            src={IMAGES.loginLuxe || IMAGES.heroAtelierNoir}
             alt="DarkKitchen Hub — Atelier Culinaire Noir"
             className="w-full h-full object-cover object-center filter brightness-90 contrast-105"
           />

@@ -303,3 +303,4 @@ const PlatilloDetalleModal = ({ item, onClose }) => {
 };
 
 export default PlatilloDetalleModal;
+

@@ -75,7 +75,7 @@ const AtelierPage = () => {
         fermentacion: 'Dry Aged 45D',
         origen: 'Smash Burger Co.',
         tag: 'Signature',
-        imagen: IMAGES.coffretSignature
+        imagen: IMAGES.smashBurger
       },
       {
         nombre: 'Frites Allumettes al Parmigiano & Truffe',
@@ -84,7 +84,7 @@ const AtelierPage = () => {
         fermentacion: 'Triple Fritura',
         origen: 'Smash Burger Co.',
         tag: 'Clásico de Pase',
-        imagen: IMAGES.tarteletteNoire
+        imagen: IMAGES.fritesTruffe
       }
     ],
     garde: [
