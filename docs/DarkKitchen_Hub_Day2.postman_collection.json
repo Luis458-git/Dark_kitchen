@@ -1,0 +1,256 @@
+{
+  "info": {
+    "name": "DarkKitchen Hub — API Colección Día 2",
+    "description": "Colección completa de endpoints para autenticación JWT y CRUDs relacionales (Marcas, Platillos, Pedidos)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000/api",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Autenticación",
+      "item": [
+        {
+          "name": "POST Registrar Usuario",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Chef Operador\",\n  \"correo\": \"chef@darkkitchen.com\",\n  \"password\": \"Password123\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/auth/register", "host": ["{{baseUrl}}"], "path": ["auth", "register"] }
+          }
+        },
+        {
+          "name": "POST Iniciar Sesión (Login)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.token) {",
+                  "  pm.collectionVariables.set('token', jsonData.token);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"correo\": \"chef@darkkitchen.com\",\n  \"password\": \"Password123\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/auth/login", "host": ["{{baseUrl}}"], "path": ["auth", "login"] }
+          }
+        },
+        {
+          "name": "GET Perfil Usuario Autenticado (/me)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/auth/me", "host": ["{{baseUrl}}"], "path": ["auth", "me"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Marcas Virtuales",
+      "item": [
+        {
+          "name": "GET Listar Marcas",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/marcas", "host": ["{{baseUrl}}"], "path": ["marcas"] }
+          }
+        },
+        {
+          "name": "GET Consultar Marca por ID",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/marcas/1", "host": ["{{baseUrl}}"], "path": ["marcas", "1"] }
+          }
+        },
+        {
+          "name": "POST Crear Marca",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Sushi Kumo\",\n  \"tipo_cocina\": \"Japonesa\",\n  \"horario_apertura\": \"12:00\",\n  \"horario_cierre\": \"23:00\",\n  \"activo\": true\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/marcas", "host": ["{{baseUrl}}"], "path": ["marcas"] }
+          }
+        },
+        {
+          "name": "PUT Actualizar Marca",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tipo_cocina\": \"Sushi & Ramen Fusion\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/marcas/1", "host": ["{{baseUrl}}"], "path": ["marcas", "1"] }
+          }
+        },
+        {
+          "name": "DELETE Eliminar Marca (Conflicto 409 si tiene platillos)",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/marcas/1", "host": ["{{baseUrl}}"], "path": ["marcas", "1"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. Platillos",
+      "item": [
+        {
+          "name": "GET Listar Platillos (con Eager Loading de Marca)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/platillos", "host": ["{{baseUrl}}"], "path": ["platillos"] }
+          }
+        },
+        {
+          "name": "GET Consultar Platillo por ID",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/platillos/1", "host": ["{{baseUrl}}"], "path": ["platillos", "1"] }
+          }
+        },
+        {
+          "name": "POST Crear Platillo (Éxito)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"marca_id\": 1,\n  \"nombre\": \"Roll Dragón Especial\",\n  \"descripcion\": \"Camarón tempura, aguacate y salsa anguila\",\n  \"precio\": 120.00,\n  \"categoria\": \"Makis\",\n  \"tiempo_preparacion_min\": 15,\n  \"disponible\": true\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/platillos", "host": ["{{baseUrl}}"], "path": ["platillos"] }
+          }
+        },
+        {
+          "name": "POST Crear Platillo (Error 400 - Marca Inexistente)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"marca_id\": 9999,\n  \"nombre\": \"Platillo Inexistente\",\n  \"precio\": 50.00,\n  \"categoria\": \"Test\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/platillos", "host": ["{{baseUrl}}"], "path": ["platillos"] }
+          }
+        },
+        {
+          "name": "PUT Actualizar Platillo",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"precio\": 135.00,\n  \"disponible\": false\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/platillos/1", "host": ["{{baseUrl}}"], "path": ["platillos", "1"] }
+          }
+        },
+        {
+          "name": "DELETE Eliminar Platillo",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/platillos/1", "host": ["{{baseUrl}}"], "path": ["platillos", "1"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. Pedidos y Despacho",
+      "item": [
+        {
+          "name": "GET Listar Pedidos (con Eager Loading)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/pedidos", "host": ["{{baseUrl}}"], "path": ["pedidos"] }
+          }
+        },
+        {
+          "name": "POST Crear Pedido",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"marca_id\": 1,\n  \"numero_orden\": \"UBER-5021\",\n  \"plataforma\": \"Uber Eats\",\n  \"cliente_nombre\": \"Carlos Mendoza\",\n  \"total\": 285.50,\n  \"estado\": \"recibido\",\n  \"notas_entrega\": \"Tocar timbre 3B\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/pedidos", "host": ["{{baseUrl}}"], "path": ["pedidos"] }
+          }
+        },
+        {
+          "name": "PUT Actualizar Estado de Pedido",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"estado\": \"en_preparacion\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/pedidos/1", "host": ["{{baseUrl}}"], "path": ["pedidos", "1"] }
+          }
+        },
+        {
+          "name": "DELETE Eliminar Pedido",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/pedidos/1", "host": ["{{baseUrl}}"], "path": ["pedidos", "1"] }
+          }
+        }
+      ]
+    }
+  ]
+}

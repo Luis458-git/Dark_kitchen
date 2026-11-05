@@ -197,3 +197,95 @@ erDiagram
    * Una marca virtual recibe y procesa múltiples pedidos de clientes a lo largo de su jornada (`1:N`).
    * Cada orden de despacho está asignada a una marca específica para permitir la separación contable y operativa por concepto culinario.
    * Regla de integridad: Las órdenes conservan la trazabilidad histórica de la marca despachante.
+
+
+#### Tabla: `usuarios` (Módulo Transversal de Autenticación — Día 2)
+Almacena las credenciales y perfiles de los operadores autorizados del sistema.
+
+| Campo | Tipo de dato | Nulo | Clave | Valor por defecto | Descripción |
+| :--- | :--- | :---: | :---: | :---: | :--- |
+| `id` | INT | NO | **PK** (AI) | — | Identificador único del usuario. |
+| `nombre` | VARCHAR(100) | NO | — | — | Nombre completo del operador. |
+| `correo` | VARCHAR(150) | NO | UNIQUE | — | Correo electrónico de acceso al sistema. |
+| `password` | VARCHAR(255) | NO | — | — | Contraseña cifrada irreversible con algoritmo `bcrypt`. |
+| `createdAt` | DATETIME | NO | — | CURRENT_TIMESTAMP | Fecha de registro. |
+| `updatedAt` | DATETIME | NO | — | CURRENT_TIMESTAMP | Fecha de actualización. |
+
+---
+
+## 9. Guía de Instalación, Configuración y Ejecución (Día 2)
+
+### 9.1. Requisitos Previos
+* Node.js v18 o superior.
+* Servidor MySQL activo (ej. XAMPP, WAMP o servicio nativo en puerto 3306).
+* Base de datos creada: `dark_kitchen_db`.
+
+---
+
+### 9.2. Configuración y Arranque del Backend
+
+1. Entrar a la carpeta `backend`:
+   ```bash
+   cd backend
+   ```
+
+2. Instalar dependencias:
+   ```bash
+   npm install
+   ```
+
+3. Configurar variables de entorno en `backend/.env` (basado en `.env.example`):
+   ```env
+   PORT=3000
+   NODE_ENV=development
+   DB_HOST=localhost
+   DB_PORT=3306
+   DB_USER=root
+   DB_PASSWORD=tu_password
+   DB_NAME=dark_kitchen_db
+   JWT_SECRET=tu_clave_secreta_super_segura
+   JWT_EXPIRES_IN=8h
+   ```
+
+4. Iniciar el servidor en modo desarrollo:
+   ```bash
+   npm run dev
+   ```
+   *El servidor sincronizará automáticamente las tablas `usuarios`, `marcas_virtuales`, `platillos` y `pedidos` en MySQL y escuchará en `http://localhost:3000`.*
+
+---
+
+### 9.3. Configuración y Arranque del Frontend (React + Vite)
+
+1. En una nueva terminal, entrar a la carpeta `frontend`:
+   ```bash
+   cd frontend
+   ```
+
+2. Instalar dependencias:
+   ```bash
+   npm install
+   ```
+
+3. Iniciar el servidor de desarrollo de Vite:
+   ```bash
+   npm run dev
+   ```
+   *La aplicación web estará disponible en el navegador en `http://localhost:5173`.*
+
+---
+
+## 10. Resumen de Características Implementadas (Día 2)
+
+* **Autenticación Centralizada:** Registro (`/api/auth/register`), login (`/api/auth/login`) con hashing `bcrypt`, emisión y verificación de JWT (`authMiddleware`).
+* **Protección de Rutas:** Middleware que intercepta `Authorization: Bearer <token>` y rechaza solicitudes no autorizadas con `401 Unauthorized`.
+* **CRUDs Completos:** 5 endpoints operativos por cada una de las 3 entidades de negocio (`marcas_virtuales`, `platillos`, `pedidos`).
+* **Integridad Relacional en Backend:**
+  * Validación de existencia de clave foránea `marca_id` antes de crear o actualizar platillos o pedidos (retorna `400 Bad Request` si no existe).
+  * Bloqueo de eliminación con dependencias (retorna `409 Conflict` si se intenta borrar una marca que contiene platillos o pedidos).
+* **Eager Loading:** Inclusión automática de datos de la marca en listados de platillos y pedidos (`include: [MarcaVirtual]`).
+* **Frontend en React:**
+  * Páginas de Login y Registro con auto-login y redirección.
+  * Interceptor de Axios para inyección de token y auto-logout ante token expirado (401).
+  * Vistas dedicadas de gestión para Marcas, Platillos y Despacho con formularios, modales de confirmación y selectores dinámicos.
+* **Documentación Técnica:** Informe de investigación profunda sobre seguridad JWT, vectores XSS vs CSRF y colección completa para Postman en `docs/`.

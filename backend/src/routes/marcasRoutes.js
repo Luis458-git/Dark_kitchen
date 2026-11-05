@@ -1,12 +1,22 @@
 const { Router } = require('express');
-const { listarMarcas, crearMarca } = require('../controllers/marcasController');
+const {
+  listarMarcas,
+  obtenerMarcaPorId,
+  crearMarca,
+  actualizarMarca,
+  eliminarMarca
+} = require('../controllers/marcasController');
+const authMiddleware = require('../middlewares/authMiddleware');
 
 const router = Router();
 
-// GET  /api/marcas  -> Listar todas las marcas virtuales
-router.get('/', listarMarcas);
+// Todas las rutas de marcas protegidas con authMiddleware
+router.use(authMiddleware);
 
-// POST /api/marcas  -> Crear una nueva marca virtual
+router.get('/', listarMarcas);
+router.get('/:id', obtenerMarcaPorId);
 router.post('/', crearMarca);
+router.put('/:id', actualizarMarca);
+router.delete('/:id', eliminarMarca);
 
 module.exports = router;

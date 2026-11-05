@@ -7,7 +7,16 @@ const TIME_REGEX = /^([01]\d|2[0-3]):[0-5]\d(:[0-5]\d)?$/;
 module.exports = (sequelize, DataTypes) => {
   class MarcaVirtual extends Model {
     static associate(models) {
-      // Las relaciones con otras entidades se definirán en los siguientes días
+      MarcaVirtual.hasMany(models.Platillo, {
+        foreignKey: 'marca_id',
+        as: 'platillos',
+        onDelete: 'RESTRICT'
+      });
+      MarcaVirtual.hasMany(models.Pedido, {
+        foreignKey: 'marca_id',
+        as: 'pedidos',
+        onDelete: 'RESTRICT'
+      });
     }
   }
 
