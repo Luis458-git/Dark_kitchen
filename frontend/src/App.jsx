@@ -8,6 +8,7 @@ import DespachoPage from './pages/DespachoPage';
 import KdsPage from './pages/KdsPage';
 import MarcasPage from './pages/MarcasPage';
 import PlatillosPage from './pages/PlatillosPage';
+import AiAgentsPage from './pages/AiAgentsPage';
 
 function App() {
   return (
@@ -51,6 +52,22 @@ function App() {
             element={
               <ProtectedRoute>
                 <PlatillosPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/ai"
+            element={
+              <ProtectedRoute>
+                <AiAgentsPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/ai-agent"
+            element={
+              <ProtectedRoute>
+                <AiAgentsPage />
               </ProtectedRoute>
             }
           />

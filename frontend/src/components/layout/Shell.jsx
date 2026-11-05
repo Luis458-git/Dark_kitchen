@@ -12,7 +12,8 @@ import {
   Radio,
   Clock,
   Sparkles,
-  ChevronRight
+  ChevronRight,
+  Cpu
 } from 'lucide-react';
 
 const Shell = ({ children, title = "Consola Operativa", subtitle = "Gestor de Cocinas Ocultas & Despacho" }) => {
@@ -31,7 +32,8 @@ const Shell = ({ children, title = "Consola Operativa", subtitle = "Gestor de Co
     { to: '/pedidos', label: 'Consola de Despacho', icon: ClipboardList, badge: 'Live' },
     { to: '/kds', label: 'Monitor KDS Cocina', icon: MonitorPlay, badge: 'KDS' },
     { to: '/marcas', label: 'Marcas Satélite', icon: Store },
-    { to: '/platillos', label: 'Recetas & Menú', icon: ChefHat }
+    { to: '/platillos', label: 'Recetas & Menú', icon: ChefHat },
+    { to: '/ai', label: 'Copiloto Multi-Agente', icon: Cpu, badge: 'IA' }
   ];
 
   return (

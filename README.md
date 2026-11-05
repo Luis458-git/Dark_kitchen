@@ -290,3 +290,32 @@ Almacena las credenciales y perfiles de los operadores autorizados del sistema.
   * Interceptor de Axios para inyección de token y auto-logout ante token expirado (401).
   * Vistas dedicadas de gestión para Marcas, Platillos y Despacho con formularios, modales de confirmación y selectores dinámicos.
 * **Documentación Técnica:** Informe de investigación profunda sobre seguridad JWT, vectores XSS vs CSRF y colección completa para Postman en `docs/`.
+
+---
+
+## 11. Sistema Multi-Agente de IA (Orquestación B2B)
+
+El sistema integra un motor de inteligencia artificial multi-agente que consulta la base de datos MySQL en tiempo real (`MarcaVirtual`, `Platillo`, `Pedido`) para optimizar el despacho, profiling y venta cruzada sin canibalizar estaciones de cocina.
+
+### 11.1. Arquitectura de los 3 Sub-Agentes + Orquestador
+1. **Orquestador Central:**
+   - Endpoint: `POST /api/ai/multi-agent` (Protegido con JWT).
+   - Identifica al cliente solicitado o auto-detecta al comensal con mayor recurrencia.
+   - Audita el estado en vivo de la cocina: marcas activas, platillos en carta, exclusión rigurosa de platillos en `Stock 86` (`disponible: false`) y volumen de comandas.
+   - Cuenta con **Motor Multi-Agente Analítico Nativo (Fallback 100% funcional sin API externa)** para garantizar disponibilidad continua.
+2. **Sub-Agente 1 (`agente_analista`):**
+   - Calcula métricas individuales del comensal: `ticket_promedio`, `total_pedidos`, `gasto_acumulado`, `plataforma_preferida` (Uber Eats, Rappi, etc.) y `marca_favorita`.
+   - Genera un `perfil_consumidor` heurístico y etiquetas de segmentación comportamental ("Ticket Alto VIP", "Gourmet Nocturno", etc.).
+3. **Sub-Agente 2 (`agente_recomendador`):**
+   - Descarta automáticamente platillos pausados (`Stock 86`).
+   - Recomienda 2 platillos de la marca favorita o estilo afín del cliente, con precio, tiempo de preparación y `justificacion_ia` detallada.
+4. **Sub-Agente 3 (`agente_cross_selling`):**
+   - Identifica oportunidades de venta cruzada en una **Marca Virtual DIFERENTE** a la marca principal del cliente.
+   - Estructura una propuesta de combo multi-marca aplicando un **10% de descuento** sobre el complemento sugerido.
+   - Provee una `estrategia_negocio` B2B para elevar el ticket promedio e incentivar el descubrimiento de marcas hermanas en la misma cocina oculta.
+
+### 11.2. Módulo Frontend
+- Vista interactiva en `/ai` (con estética *Dark Kitchen — Atelier Noir*).
+- Selector de comensales frecuentes conectado al endpoint `GET /api/ai/clientes`.
+- Pipeline visual con estados de los 4 pasos de la orquestación en tiempo real.
+- Acceso directo desde la barra de navegación persistente (`Shell.jsx`) y desde la Consola de Despacho (`DespachoPage.jsx`).

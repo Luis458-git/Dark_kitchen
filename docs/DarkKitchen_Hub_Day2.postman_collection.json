@@ -251,6 +251,49 @@
           }
         }
       ]
+    },
+    {
+      "name": "5. Sistema Multi-Agente IA",
+      "item": [
+        {
+          "name": "POST Orquestacion Multi-Agente (Auto-Select)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{}"
+            },
+            "url": { "raw": "{{baseUrl}}/ai/multi-agent", "host": ["{{baseUrl}}"], "path": ["ai", "multi-agent"] }
+          }
+        },
+        {
+          "name": "POST Orquestacion Multi-Agente (Cliente Especifico)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cliente_nombre\": \"Mariana López\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/ai/multi-agent", "host": ["{{baseUrl}}"], "path": ["ai", "multi-agent"] }
+          }
+        },
+        {
+          "name": "GET Comensales para Profiling",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/ai/clientes", "host": ["{{baseUrl}}"], "path": ["ai", "clientes"] }
+          }
+        }
+      ]
     }
   ]
 }

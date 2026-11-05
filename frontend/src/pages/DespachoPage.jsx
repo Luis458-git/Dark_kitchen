@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Shell from '../components/layout/Shell';
 import { pedidosService } from '../services/pedidosService';
 import { marcasService } from '../services/marcasService';
@@ -17,7 +18,9 @@ import {
   Trash2,
   Edit2,
   RefreshCw,
-  X
+  X,
+  Cpu,
+  ArrowRight
 } from 'lucide-react';
 
 const CANALES = ['Todos', 'Uber Eats', 'Rappi', 'DiDi Food', 'Pedido Directo'];
@@ -434,6 +437,15 @@ const DespachoPage = () => {
                 </p>
               </div>
             </div>
+
+            <Link
+              to="/ai"
+              className="w-full py-2.5 px-3 rounded-lg bg-gold-400/10 hover:bg-gold-400/20 border border-gold-400/40 text-gold-400 font-mono text-xs font-semibold flex items-center justify-center space-x-2 transition-all shadow-gold-glow/20"
+            >
+              <Cpu className="w-3.5 h-3.5" />
+              <span>Orquestador Multi-Agente IA</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
 
             <div className="pt-3 border-t border-noir-700/60 text-[10px] font-mono text-brand-muted text-center">
               Telemetría recalculada cada 15 segundos.
