@@ -16,7 +16,8 @@ router.get('/', listarPedidos);
 router.get('/:id', obtenerPedidoPorId);
 router.post('/', crearPedido);
 router.put('/:id', actualizarPedido);
+router.put('/:id/estado', actualizarPedido);
+router.patch('/:id/estado', actualizarPedido);
 router.delete('/:id', eliminarPedido);
 
 module.exports = router;
-

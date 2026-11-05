@@ -63,6 +63,7 @@ Desarrollar un sistema empresarial que facilite la gestión y organización de m
 
 
 
+
 ---
 
 ## 8. Modelado de datos empresarial (Día 1)
