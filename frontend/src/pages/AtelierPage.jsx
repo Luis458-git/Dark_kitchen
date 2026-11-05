@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import { IMAGES } from '../constants/images';
 import PlatilloDetalleModal from '../components/common/PlatilloDetalleModal';
 import {
@@ -18,6 +19,7 @@ import {
 } from 'lucide-react';
 
 const AtelierPage = () => {
+  const { isAuthenticated, usuario } = useAuth();
   const [coleccionActiva, setColeccionActiva] = useState('nocturne');
   const [platilloSeleccionado, setPlatilloSeleccionado] = useState(null);
 
@@ -142,13 +144,23 @@ const AtelierPage = () => {
           >
             [MONITOR KDS]
           </Link>
-          <Link
-            to="/login"
-            className="px-4 py-2 rounded text-xs font-mono uppercase tracking-wider font-semibold bg-gold-400 text-noir-950 hover:bg-gold-300 transition-all shadow-gold-glow flex items-center space-x-1.5"
-          >
-            <span>Acceso Operativo</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
+          {isAuthenticated ? (
+            <Link
+              to="/pedidos"
+              className="px-4 py-2 rounded text-xs font-mono uppercase tracking-wider font-semibold bg-gold-400 text-noir-950 hover:bg-gold-300 transition-all shadow-gold-glow flex items-center space-x-1.5 active:scale-95 duration-150"
+            >
+              <span>Consola ({usuario?.nombre?.split(' ')[0] || 'Operador'})</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          ) : (
+            <Link
+              to="/login"
+              className="px-4 py-2 rounded text-xs font-mono uppercase tracking-wider font-semibold bg-gold-400 text-noir-950 hover:bg-gold-300 transition-all shadow-gold-glow flex items-center space-x-1.5 active:scale-95 duration-150"
+            >
+              <span>Acceso Operativo</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          )}
         </div>
       </header>
 
@@ -171,10 +183,10 @@ const AtelierPage = () => {
 
             <div className="flex items-center space-x-4">
               <Link
-                to="/login"
-                className="px-6 py-3 rounded-lg bg-gold-400 hover:bg-gold-300 text-noir-950 text-xs font-mono font-bold tracking-wider uppercase transition-all shadow-gold-glow flex items-center space-x-2"
+                to={isAuthenticated ? "/pedidos" : "/login"}
+                className="px-6 py-3 rounded-lg bg-gold-400 hover:bg-gold-300 text-noir-950 text-xs font-mono font-bold tracking-wider uppercase transition-all shadow-gold-glow flex items-center space-x-2 active:scale-95 duration-150"
               >
-                <span>Ingresar al Pase Operativo</span>
+                <span>{isAuthenticated ? "Ir a la Consola de Despacho" : "Ingresar al Pase Operativo"}</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
@@ -335,10 +347,10 @@ const AtelierPage = () => {
           </p>
 
           <Link
-            to="/login"
-            className="inline-flex items-center space-x-2 px-6 py-3 rounded-lg bg-gold-400 hover:bg-gold-300 text-noir-950 text-xs font-mono font-bold tracking-wider uppercase transition-all shadow-gold-glow"
+            to={isAuthenticated ? "/pedidos" : "/login"}
+            className="inline-flex items-center space-x-2 px-6 py-3 rounded-lg bg-gold-400 hover:bg-gold-300 text-noir-950 text-xs font-mono font-bold tracking-wider uppercase transition-all shadow-gold-glow active:scale-95 duration-150"
           >
-            <span>Reservar Servicios de Catering</span>
+            <span>{isAuthenticated ? "Gestionar Servicios de Catering" : "Reservar Servicios de Catering"}</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
@@ -381,7 +393,9 @@ const AtelierPage = () => {
           <span>Gestor Empresarial de Cocinas Ocultas B2B</span>
         </div>
         <div className="mt-4 md:mt-0 flex items-center space-x-6">
-          <Link to="/login" className="hover:text-gold-400 transition-colors">Consola Operativa</Link>
+          <Link to={isAuthenticated ? "/pedidos" : "/login"} className="hover:text-gold-400 transition-colors">
+            {isAuthenticated ? "Consola de Despacho" : "Acceso Operativo"}
+          </Link>
           <Link to="/kds" className="hover:text-gold-400 transition-colors">Monitor KDS</Link>
           <Link to="/marcas" className="hover:text-gold-400 transition-colors">Marcas Satélite</Link>
         </div>

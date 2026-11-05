@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink, useNavigate, useLocation } from 'react-router-dom';
+import { NavLink, Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import {
   Flame,
@@ -30,7 +30,6 @@ const Shell = ({ children, title = "Consola Operativa", subtitle = "Gestor de Co
   }, []);
 
   const navItems = [
-    { to: '/', label: 'DarkKitchen Hub', icon: Sparkles, badge: 'Portal' },
     { to: '/pedidos', label: 'Consola de Despacho', icon: ClipboardList, badge: 'Live' },
     { to: '/kds', label: 'Monitor KDS Cocina', icon: MonitorPlay, badge: 'KDS' },
     { to: '/marcas', label: 'Marcas Satélite', icon: Store },
@@ -58,19 +57,27 @@ const Shell = ({ children, title = "Consola Operativa", subtitle = "Gestor de Co
         </button>
 
         <div>
-          {/* Logo Brand Header */}
+          {/* Logo Brand Header (Enlace con icono hacia el Portal Landing) */}
           <div className="p-5 border-b border-noir-700/60 flex items-center justify-between">
-            <div className={`flex items-center ${isCollapsed ? 'justify-center w-full' : 'space-x-3'}`}>
-              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-gold-400/20 to-noir-800 border border-gold-400/40 flex items-center justify-center text-gold-400 shadow-gold-glow shrink-0">
+            <Link
+              to="/"
+              title="Ir al Portal DarkKitchen Hub"
+              className={`flex items-center ${isCollapsed ? 'justify-center w-full' : 'space-x-3'} group cursor-pointer`}
+            >
+              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-gold-400/20 to-noir-800 border border-gold-400/40 flex items-center justify-center text-gold-400 shadow-gold-glow shrink-0 group-hover:scale-105 group-hover:border-gold-400 transition-all duration-200">
                 <Flame className="w-5 h-5" />
               </div>
               {!isCollapsed && (
                 <div className="overflow-hidden transition-opacity duration-200">
-                  <h1 className="font-serif text-lg font-bold tracking-wide text-brand-primary truncate">DarkKitchen Hub</h1>
-                  <p className="text-[10px] tracking-widest uppercase font-mono text-gold-400 truncate">Cocinas Ocultas & Despacho</p>
+                  <h1 className="font-serif text-lg font-bold tracking-wide text-brand-primary truncate group-hover:text-gold-400 transition-colors">
+                    DarkKitchen Hub
+                  </h1>
+                  <p className="text-[10px] tracking-widest uppercase font-mono text-gold-400 truncate">
+                    Cocinas Ocultas & Despacho
+                  </p>
                 </div>
               )}
-            </div>
+            </Link>
           </div>
 
           {/* Estado de Telemetría */}
