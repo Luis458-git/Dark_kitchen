@@ -103,3 +103,4 @@ Para este entorno educativo y de integración API REST pura desacoplada con clie
 3. **OWASP Foundation — Cross-Site Scripting (XSS) Prevention Cheat Sheet:** [https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html)
 4. **Auth0 by Okta — Token-Based Authentication Best Practices:** [https://auth0.com/docs/secure/tokens/json-web-tokens](https://auth0.com/docs/secure/tokens/json-web-tokens)
 5. **Node.js `jsonwebtoken` Official Documentation:** [https://github.com/auth0/node-jsonwebtoken](https://github.com/auth0/node-jsonwebtoken)
+

@@ -19,3 +19,4 @@ router.put('/:id', actualizarPlatillo);
 router.delete('/:id', eliminarPlatillo);
 
 module.exports = router;
+
