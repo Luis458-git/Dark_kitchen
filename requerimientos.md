@@ -274,6 +274,7 @@ Variables de entorno (`backend/.env`, plantilla en `.env.example`):
 | 17 | Pruebas automáticas: POST vacío → 400, tipos incorrectos → 400, JSON roto → 400, ruta inexistente → 404, error de BD → 500. Credenciales de MySQL verificadas.   | Completado |
 | 18 | Corrección del nombre de la base de datos: `dark_kitchen_hub` → `dark_kitchen_db` (`.env`, `.env.example`, bitácora). Conexión, `sync` y `GET /api/marcas` (200) verificados. | Completado |
 | 19 | Proyecto subido al repositorio de GitHub (`Luis458-git/Dark_kitchen`), excluyendo `.env` y `node_modules`. | Completado |
+| 20 | Pruebas HTTP exitosas en Postman: `POST /api/marcas` (código 201) creando registros en MySQL y `GET /api/marcas` (código 200) listándolos correctamente. | Completado |
 
 **Decisiones tomadas:**
 
@@ -294,10 +295,11 @@ Variables de entorno (`backend/.env`, plantilla en `.env.example`):
 | Servidor Node.js funcionando                      | Completado (conectado a `dark_kitchen_db`) |
 | Endpoint POST de al menos una entidad             | Completado (`POST /api/marcas`) |
 | Endpoint GET de al menos una entidad              | Completado (`GET /api/marcas`)  |
-| Pruebas con Postman / Thunder Client              | Pendiente   |
+| Pruebas con Postman / Thunder Client              | Completado (evidenciado con 201 Created y 200 OK) |
 
 ### Próximos pasos
 
-1. Probar `POST /api/marcas` y `GET /api/marcas` con Postman o Thunder Client (capturas para la entrega).
-2. Definir las entidades principales y el diagrama entidad-relación.
+1. Definir las entidades principales del negocio (mínimo 3 relacionadas).
+2. Elaborar el Diagrama Entidad-Relación (ER) con atributos y relaciones (35% de la evaluación).
+3. Guardar las capturas de Postman para el informe/documento de entrega.
 
