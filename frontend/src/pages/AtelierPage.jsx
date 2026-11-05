@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { IMAGES } from '../constants/images';
 import {
   Flame,
   Sparkles,
@@ -10,74 +11,94 @@ import {
   ChevronRight,
   Layers,
   ThermometerSnowflake,
-  Star
+  Star,
+  Moon,
+  Wine
 } from 'lucide-react';
 
 const AtelierPage = () => {
   const [coleccionActiva, setColeccionActiva] = useState('nocturne');
 
   const colecciones = [
-    { id: 'nocturne', label: 'Colección Noire', count: '04 Obras' },
+    { id: 'nocturne', label: 'Creaciones de la Noche', count: '04 Obras' },
     { id: 'smash', label: 'Laboratorio Smash & Truffle', count: '03 Creaciones' },
     { id: 'garde', label: 'Boulangerie de Medianoche', count: '05 Fermentaciones' }
   ];
 
-  const productosAutor = {
-    nocturne: [
-      {
-        nombre: 'Tartelette Noire Valrhona',
-        subtitulo: 'Ganache de cacao Guanaja 70%, flor de sal marina de Guérande y polvo de oro',
-        precio: '$18.50',
-        fermentacion: '36 Horas',
-        origen: 'Maison Noire Patisserie',
-        tag: 'Firma de Autor'
-      },
-      {
-        nombre: 'Cannelés Bordelais au Rhum Brun',
-        subtitulo: 'Costra caramelizada en moldes de cobre batido, vainilla Bourbon de Madagascar',
-        precio: '$14.00',
-        fermentacion: '48 Horas Infusión',
-        origen: 'Maison Noire',
-        tag: 'Edición Nocturna'
-      },
-      {
-        nombre: 'Brioche Feuilletée Cacao Pur',
-        subtitulo: 'Hojaldrado artesanal con mantequilla de Bretaña AOP y gianduja de avellanas',
-        precio: '$16.20',
-        fermentacion: '72 Horas',
-        origen: 'Le Fournil Noir',
-        tag: 'Lenta Maduración'
-      }
-    ],
+  const creacionesDeLaNoche = [
+    {
+      nombre: 'Tartelette Noire aux Figues',
+      subtitulo: 'Ganache de cacao Guanaja 70%, higos negros macerados, flor de sal de Guérande y hoja de oro.',
+      precio: '$18.50',
+      fermentacion: '36 Horas',
+      origen: 'Maison Noire',
+      tag: 'Firma de Autor',
+      imagen: IMAGES.tarteletteNoire
+    },
+    {
+      nombre: 'Cannelés Bordelais au Rhum',
+      subtitulo: 'Costra caramelizada en moldes de cobre batido, corazón cremoso con vainilla Bourbon de Madagascar.',
+      precio: '$14.00',
+      fermentacion: '48 Horas Infusión',
+      origen: 'Maison Noire',
+      tag: 'Edición Nocturna',
+      imagen: IMAGES.cannelesBordelais
+    },
+    {
+      nombre: 'Brioche Feuilletée au Sucre',
+      subtitulo: 'Hojaldrado artesanal con mantequilla de Bretaña AOP, azúcar perlado y gianduja tibia.',
+      precio: '$16.20',
+      fermentacion: '72 Horas',
+      origen: 'Le Fournil Noir',
+      tag: 'Lenta Maduración',
+      imagen: IMAGES.briocheFeuilly
+    },
+    {
+      nombre: 'Coffret Signature "L\'Atelier"',
+      subtitulo: 'Selección curada de 8 piezas numeradas de pastelería nocturna con maridaje de café etíope.',
+      precio: '$38.00',
+      fermentacion: 'Edición Numerada',
+      origen: 'DarkKitchen Hub',
+      tag: 'Cofre Exclusivo',
+      imagen: IMAGES.coffretSignature
+    }
+  ];
+
+  const otrasColecciones = {
     smash: [
       {
         nombre: 'The Black Gold Wagyu Smash',
-        subtitulo: 'Doble medallón A5 de 90g, cheddar inglés añejo 18 meses, emulsión de trufa negra',
+        subtitulo: 'Doble medallón A5 de 90g, cheddar inglés añejo 18 meses, emulsión de trufa negra.',
         precio: '$26.00',
         fermentacion: 'Dry Aged 45D',
         origen: 'Smash Burger Co.',
-        tag: 'Signature'
+        tag: 'Signature',
+        imagen: IMAGES.coffretSignature
       },
       {
         nombre: 'Frites Allumettes al Parmigiano & Truffe',
-        subtitulo: 'Papas pont-neuf en triple cocción en grasa de pato con ralladura de trufa fresca',
+        subtitulo: 'Papas pont-neuf en triple cocción en grasa de pato con ralladura de trufa fresca.',
         precio: '$12.50',
         fermentacion: 'Triple Fritura',
         origen: 'Smash Burger Co.',
-        tag: 'Clásico de Pase'
+        tag: 'Clásico de Pase',
+        imagen: IMAGES.tarteletteNoire
       }
     ],
     garde: [
       {
         nombre: 'Pain de Campagne al Carbón Vegetal',
-        subtitulo: 'Masa madre centenaria con ceniza vegetal purificada y harina molida a piedra',
+        subtitulo: 'Masa madre centenaria con ceniza vegetal purificada y harina molida a piedra.',
         precio: '$11.00',
         fermentacion: '72 Horas Frío',
         origen: 'Atelier Boulanger',
-        tag: 'Masa Madre 1924'
+        tag: 'Masa Madre 1924',
+        imagen: IMAGES.heroAtelierDore
       }
     ]
   };
+
+  const listaProductos = coleccionActiva === 'nocturne' ? creacionesDeLaNoche : (otrasColecciones[coleccionActiva] || []);
 
   const criticas = [
     {
@@ -97,7 +118,7 @@ const AtelierPage = () => {
       {/* Top Banner de Navegación Editorial */}
       <header className="border-b border-noir-700/60 bg-noir-900/80 backdrop-blur-md sticky top-0 z-50 px-8 py-4 flex items-center justify-between">
         <div className="flex items-center space-x-3">
-          <div className="w-9 h-9 rounded bg-gold-400/10 border border-gold-400/30 flex items-center justify-center text-gold-400">
+          <div className="w-9 h-9 rounded bg-gold-400/10 border border-gold-400/30 flex items-center justify-center text-gold-400 shadow-gold-glow">
             <Flame className="w-5 h-5" />
           </div>
           <div>
@@ -129,20 +150,65 @@ const AtelierPage = () => {
         </div>
       </header>
 
-      {/* Hero Editorial Gourmet */}
-      <section className="relative px-8 py-24 max-w-6xl mx-auto border-b border-noir-700/40">
-        <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-gold-400/30 bg-gold-400/10 text-gold-400 text-xs font-mono mb-8">
-          <Sparkles className="w-3.5 h-3.5" />
-          <span className="tracking-widest uppercase font-semibold">DarkKitchen Hub — Sistema B2B</span>
+      {/* Hero Editorial Gourmet con Fotografía Principal */}
+      <section className="relative px-8 pt-20 pb-16 max-w-6xl mx-auto border-b border-noir-700/40">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-16">
+          <div className="lg:col-span-7">
+            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-gold-400/30 bg-gold-400/10 text-gold-400 text-xs font-mono mb-8">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span className="tracking-widest uppercase font-semibold">DarkKitchen Hub — Sistema B2B</span>
+            </div>
+
+            <h1 className="font-serif text-4xl md:text-6xl font-bold tracking-tight text-brand-primary leading-[1.1] mb-6">
+              Elaborado en la penumbra de cada alba, con <span className="italic gold-gradient-text font-normal">fuego lento</span>, cacao puro y devoción.
+            </h1>
+
+            <p className="text-brand-secondary text-base md:text-lg font-light leading-relaxed mb-8 max-w-xl">
+              DarkKitchen Hub centraliza el pase térmico, la trazabilidad de insumos y el despacho milimétrico de nuestras marcas satélite bajo estándares de alta gastronomía.
+            </p>
+
+            <div className="flex items-center space-x-4">
+              <Link
+                to="/login"
+                className="px-6 py-3 rounded-lg bg-gold-400 hover:bg-gold-300 text-noir-950 text-xs font-mono font-bold tracking-wider uppercase transition-all shadow-gold-glow flex items-center space-x-2"
+              >
+                <span>Ingresar al Pase Operativo</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link
+                to="/pedidos"
+                className="px-6 py-3 rounded-lg bg-noir-900 hover:bg-noir-800 text-brand-primary text-xs font-mono font-semibold tracking-wider uppercase border border-noir-700 transition-all"
+              >
+                Ver Comandas en Vivo
+              </Link>
+            </div>
+          </div>
+
+          {/* Fotografía Hero con Bordes Redondeados & Badge Flotante */}
+          <div className="lg:col-span-5">
+            <div className="relative rounded-2xl border border-[#282A33] shadow-2xl overflow-hidden group">
+              <div className="absolute inset-0 bg-gradient-to-t from-noir-950 via-noir-950/20 to-transparent z-10"></div>
+              
+              <img
+                src={IMAGES.heroAtelierNoir}
+                alt="Dark luxury editorial food photography"
+                className="w-full h-[440px] object-cover group-hover:scale-105 transition-transform duration-700 filter brightness-95"
+              />
+
+              {/* Badge Flotante "Servicio 20:00 — 03:00" */}
+              <div className="absolute top-4 right-4 z-20 flex items-center space-x-2 px-3 py-1.5 rounded-full bg-noir-950/90 border border-gold-400/40 text-gold-400 text-xs font-mono backdrop-blur-md shadow-gold-glow">
+                <Moon className="w-3.5 h-3.5" />
+                <span className="font-semibold tracking-wider">Servicio 20:00 — 03:00</span>
+              </div>
+
+              {/* Pie de Foto Flotante */}
+              <div className="absolute bottom-4 left-4 right-4 z-20 p-3 rounded-lg bg-noir-900/90 border border-noir-700/80 backdrop-blur-md text-xs font-mono">
+                <div className="text-gold-400 font-semibold font-serif text-sm">Tartelette Noire au Chocolat</div>
+                <div className="text-brand-secondary text-[11px] mt-0.5">Maison Noire · Pase Térmico 16°C</div>
+              </div>
+            </div>
+          </div>
         </div>
-
-        <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-brand-primary leading-[1.1] mb-8 max-w-4xl">
-          Elaborado en la penumbra de cada alba, con <span className="italic gold-gradient-text font-normal">fuego lento</span>, cacao puro y devoción.
-        </h1>
-
-        <p className="text-brand-secondary text-lg md:text-xl font-light max-w-2xl leading-relaxed mb-10">
-          DarkKitchen Hub centraliza el pase térmico, la trazabilidad de insumos y el despacho milimétrico de nuestras marcas satélite bajo estándares de alta gastronomía.
-        </p>
 
         {/* Métricas de Manifiesto */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-10 border-t border-noir-700/60 font-mono">
@@ -165,12 +231,13 @@ const AtelierPage = () => {
         </div>
       </section>
 
-      {/* Selector de Colecciones Nocturnas & Cards de Autor */}
+      {/* Sección: Creaciones de la Noche con Imágenes en Cards */}
       <section className="px-8 py-20 max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
           <div>
-            <h2 className="font-serif text-3xl font-bold text-brand-primary">Colecciones Nocturnas</h2>
-            <p className="text-brand-secondary text-sm mt-1">Catálogo de producción de alta fidelidad para nuestras marcas de autor.</p>
+            <div className="text-xs font-mono uppercase tracking-widest text-gold-400 font-semibold mb-2">Carta de Autor</div>
+            <h2 className="font-serif text-3xl font-bold text-brand-primary">Creaciones de la Noche</h2>
+            <p className="text-brand-secondary text-sm mt-1">Catálogo de producción de alta fidelidad para nuestras marcas satélite.</p>
           </div>
 
           <div className="flex items-center space-x-2 mt-4 md:mt-0 bg-noir-900 p-1.5 rounded-lg border border-noir-700">
@@ -190,33 +257,44 @@ const AtelierPage = () => {
           </div>
         </div>
 
-        {/* Grid de Productos */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {(productosAutor[coleccionActiva] || []).map((item, idx) => (
+        {/* Grid de 4 Productos con Imágenes */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {listaProductos.map((item, idx) => (
             <div
               key={idx}
-              className="group p-6 rounded-xl bg-noir-800 border border-noir-700 hover:border-gold-400/50 transition-all duration-300 flex flex-col justify-between hover:shadow-gold-glow/20"
+              className="group p-4 rounded-xl bg-noir-900 border border-noir-700/80 hover:border-gold-400/50 transition-all duration-300 flex flex-col justify-between hover:shadow-gold-glow/20"
             >
               <div>
-                <div className="flex items-center justify-between text-xs font-mono text-brand-muted mb-4">
-                  <span className="text-gold-400 font-semibold">{item.origen}</span>
-                  <span className="px-2 py-0.5 rounded bg-noir-900 border border-noir-700/80">{item.tag}</span>
+                {/* Contenedor de Imagen con Zoom Hover */}
+                <div className="overflow-hidden rounded-lg mb-4 bg-noir-950 border border-noir-800 relative">
+                  <img
+                    src={item.imagen}
+                    alt={item.nombre}
+                    className="object-cover h-52 w-full group-hover:scale-105 transition-transform duration-500 filter brightness-95"
+                  />
+                  <span className="absolute top-2.5 right-2.5 px-2 py-0.5 rounded bg-noir-950/80 border border-noir-700/80 text-[10px] font-mono text-gold-400 backdrop-blur-sm">
+                    {item.tag}
+                  </span>
                 </div>
-                <h3 className="font-serif text-xl font-bold text-brand-primary group-hover:text-gold-400 transition-colors">
+
+                <div className="text-xs font-mono text-gold-400 font-semibold mb-1">
+                  {item.origen}
+                </div>
+                <h3 className="font-serif text-lg font-bold text-brand-primary group-hover:text-gold-400 transition-colors line-clamp-1">
                   {item.nombre}
                 </h3>
-                <p className="text-brand-secondary text-xs mt-3 leading-relaxed font-light">
+                <p className="text-brand-secondary text-xs mt-2 leading-relaxed font-light line-clamp-2">
                   {item.subtitulo}
                 </p>
               </div>
 
-              <div className="pt-6 mt-6 border-t border-noir-700/60 flex items-center justify-between">
+              <div className="pt-4 mt-4 border-t border-noir-700/60 flex items-center justify-between">
                 <div>
-                  <span className="text-[10px] font-mono text-brand-muted block uppercase">Fermentación / Pase</span>
+                  <span className="text-[10px] font-mono text-brand-muted block uppercase">Pase</span>
                   <span className="text-xs font-mono text-brand-secondary font-medium">{item.fermentacion}</span>
                 </div>
                 <div className="text-right">
-                  <span className="text-lg font-serif font-bold text-gold-400 tabular-nums">{item.precio}</span>
+                  <span className="text-base font-serif font-bold text-gold-400 tabular-nums">{item.precio}</span>
                 </div>
               </div>
             </div>
@@ -224,7 +302,43 @@ const AtelierPage = () => {
         </div>
       </section>
 
-      {/* Críticas Gastronómicas y Manifiesto de Despacho */}
+      {/* Sección Bespoke Catering con Imagen de Fondo (salonCatering) */}
+      <section className="relative px-8 py-24 border-t border-noir-700/40 overflow-hidden">
+        {/* Imagen de Fondo con Degradado hacia #0D0E12 */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src={IMAGES.salonCatering}
+            alt="Salón Privado & Eventos Nocturnos"
+            className="w-full h-full object-cover filter brightness-40"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-noir-950 via-noir-950/85 to-noir-950/70"></div>
+        </div>
+
+        <div className="relative z-10 max-w-4xl mx-auto text-center">
+          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-gold-400/30 bg-gold-400/10 text-gold-400 text-xs font-mono mb-6">
+            <Wine className="w-3.5 h-3.5" />
+            <span className="tracking-widest uppercase font-semibold">Bespoke Catering & Salón Privado</span>
+          </div>
+
+          <h2 className="font-serif text-3xl md:text-5xl font-bold text-brand-primary mb-6">
+            Experiencias gastronómicas de autor fuera del pase habitual.
+          </h2>
+
+          <p className="text-brand-secondary text-base md:text-lg leading-relaxed mb-8 max-w-2xl mx-auto">
+            Organizamos veladas privadas, caterings exclusivos y lanzamientos culinarios con despacho térmico en locación y brigada de servicio especializada.
+          </p>
+
+          <Link
+            to="/login"
+            className="inline-flex items-center space-x-2 px-6 py-3 rounded-lg bg-gold-400 hover:bg-gold-300 text-noir-950 text-xs font-mono font-bold tracking-wider uppercase transition-all shadow-gold-glow"
+          >
+            <span>Reservar Servicios de Catering</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+      </section>
+
+      {/* Críticas Gastronómicas */}
       <section className="px-8 py-20 border-t border-noir-700/40 bg-noir-900/60">
         <div className="max-w-6xl mx-auto">
           <div className="text-center max-w-2xl mx-auto mb-16">
