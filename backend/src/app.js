@@ -5,6 +5,7 @@ const marcasRoutes = require('./routes/marcasRoutes');
 const platillosRoutes = require('./routes/platillosRoutes');
 const pedidosRoutes = require('./routes/pedidosRoutes');
 const aiRoutes = require('./routes/aiRoutes');
+const statusRoutes = require('./routes/statusRoutes');
 const errorHandler = require('./middlewares/errorHandler');
 const { errorResponse } = require('./utils/apiResponse');
 
@@ -20,6 +21,7 @@ app.use('/api/marcas', marcasRoutes);
 app.use('/api/platillos', platillosRoutes);
 app.use('/api/pedidos', pedidosRoutes);
 app.use('/api/ai', aiRoutes);
+app.use('/api/status', statusRoutes);
 
 // Manejo de rutas inexistentes
 app.use((req, res) => errorResponse(res, 404, `Ruta no encontrada: ${req.originalUrl}`));
